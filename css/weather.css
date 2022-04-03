@@ -1,0 +1,64 @@
+body{
+    margin: 4%;
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+    
+}
+.warper{
+    background-image: url("/assets/images/cld.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%,100%;
+    height: 100vh;
+    width:500px;
+    border-radius: 3px;
+    
+}
+
+#arrow{
+    font-size: 30px;
+    margin: 5px;
+    padding: 3%;
+}
+
+#close{
+    font-size: 30px;
+    color: aqua;
+    padding: 4%;
+}
+
+.para{
+    font-size: 20px;
+    color: aqua;
+}
+
+header{
+    font-size: 30px;
+    text-align: center;
+    color: aqua;
+}
+
+.row{
+  margin: 30px;
+   padding-top: 5%;
+} 
+
+.line{
+    border-bottom: 2px solid black;
+    margin-bottom: 3px;
+}
+
+.content{
+    font-size: 70px;
+    padding: 4%;
+    margin-top: 100px;
+    text-align: center;
+}
+
+#row1{
+   text-align: center;
+   
+}
+#degree{
+    font-size: 50px;
+}

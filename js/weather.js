@@ -1,5 +1,5 @@
 const getLonandLat = async (city) => {
-  const apiurl = `http://api.positionstack.com/v1/forward?access_key=cfaec01244443b38dc6634cd96e9e746&query=${city}`;
+  const apiurl = `//api.positionstack.com/v1/forward?access_key=cfaec01244443b38dc6634cd96e9e746&query=${city}`;
   const resp = await fetch(apiurl);
 
   if (!resp.ok) { throw Error(resp.statusText); }

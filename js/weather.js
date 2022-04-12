@@ -1,30 +1,42 @@
 const getLonandLat = async (city) => {
-  const apiurl = `//api.positionstack.com/v1/forward?access_key=cfaec01244443b38dc6634cd96e9e746&query=${city}`;
-  const resp = await fetch(apiurl);
+  const options = {
+    method: 'GET',
+    url: 'https://address-from-to-latitude-longitude.p.rapidapi.com/geolocationapi',
+    params: {address: city},
+    headers: {
+      'X-RapidAPI-Host': 'address-from-to-latitude-longitude.p.rapidapi.com',
+      'X-RapidAPI-Key': '5db44c9191msh3e9179c96ec7e50p1b96e8jsnbb5f80f4f3cb'
+    }
+  };
+  
+  const resp = await axios.request(options);
+  const array = resp.data["Results"];
 
-  if (!resp.ok) { throw Error(resp.statusText); }
+  if(array.length === 0) {
+    throw Error("Can not find Place");
+  }
 
-  const array = (await resp.json()).data;
+  let [maxRelevance, idx] = [array[0]["Relevance"], 0];
 
-  for (let json of array) {
-    if (json.type === "locality") {
-      return {
-        lat: json.latitude,
-        lon: json.longitude
-      }
+  for (let i = 0; i < array.length; ++i) {
+    console.log(array[i]);
+    if(array[i]["Relevance"] > maxRelevance) {
+      maxRelevance = array[i]["Relevance"];
+      idx = i;
     }
   }
 
-  throw Error("Can't Find City");
+  return {
+    lat: array[idx].latitude,
+    lon: array[idx].longitude
+  }
 }
 
 const getWeather = async (lat, lon) => {
   const apiurl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=6368f66267f86b0a8e874ad0ec13163b`;
-  const resp = await fetch(apiurl);
+  const resp = await axios.get(apiurl);
 
-  if (!resp.ok) { throw Error(resp.statusText); }
-
-  return (await resp.json());
+  return (await resp.data);
 }
 
 const queryParser = (query) => {
